@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My API"
+  },
+  "components": {
+    "schemas": {
+
+    },
+    "parameters": {
+
+    }
+  },
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 10,
+              "example": "1234"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the user details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "123"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "age": {
+                      "type": "number",
+                      "example": 42
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "age"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 10,
+              "example": "1234"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the user details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "123"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "age": {
+                      "type": "number",
+                      "example": 42
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "age"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
