@@ -1,0 +1,42 @@
+import express from "express"
+
+const app = express()
+const PORT = 3000;
+
+app.use(express.json())
+
+const otpStore:Record<string,string> = {};
+
+app.post("/generate-otp",(req,res)=>{
+    const email = req.body.email;
+    if(!email){
+        res.status(400).json({
+            message:"Email is required!"
+        })
+    }
+    const otp = Math.floor(100000 + Math.random()*900000).toString();
+    otpStore[email] = otp;
+    // send email to user
+    console.log(`OTP for ${email}: ${otp}`);
+    res.status(200).json({
+        message:"OTP generated and logged"
+    })
+});
+
+app.post("/reset-password",(req,res)=>{
+    const { email, otp, newPassword } = req.body;
+    if(!email || !otp || !newPassword){
+        res.status(400).json({message:"Email, otp, newPassword is required"});
+    }
+    if(otpStore[email] === otp){
+        console.log(`password of ${email} has been reset to ${newPassword}`);
+        delete otpStore[email];
+        res.status(200).json({message:"Password has been reset successfully"});
+    }else{
+        res.status(400).json({message:"Invalid otp"});
+    }
+})
+
+app.listen(PORT,()=>{
+    console.log(`Server is running on http://localhost:${PORT}`);
+})
